@@ -23,6 +23,8 @@ namespace KidsFun.Repositories
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+
             modelBuilder.Entity<TaskAssignment>()
                 .HasKey(e => e.Id);
 

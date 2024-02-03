@@ -1,6 +1,8 @@
 using KidsFun.Models;
+using KidsFun.Repositories;
 using KidsFun.WebApi.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
 
 namespace KidsFun.WebApi.Controllers
@@ -10,27 +12,30 @@ namespace KidsFun.WebApi.Controllers
     public class AssignmentController : ControllerBase
     {
         private readonly ILogger<AssignmentController> _logger;
-        private readonly IAssignmentManager _manager;
+        private readonly KidsFunContext _dbContext;
 
-        public AssignmentController(IAssignmentManager manager, ILogger<AssignmentController> logger)
+        public AssignmentController(KidsFunContext context, ILogger<AssignmentController> logger)
         {
-            _manager = manager;
+            _dbContext = context;
             _logger = logger;
         }
 
         [HttpGet(Name = "GetAssignments")]
         public async Task<IActionResult> GetAsync(int kidId)
         {
-            if (kidId <= 0)
-                return BadRequest("Invalid kid Id");
-            var assignments = await _manager.LoadAsync(kidId);
-            return Ok(assignments.Select(d=> new TaskAssignmentDto { TaskTypeId = d.Type.Id, Due = d.Due}).ToList());
+            var result = await _dbContext.Kids.ToListAsync();
+            return Ok(result);
         }
 
         [HttpPost(Name = "GetAssignments")]
         public void Assign(TaskAssignmentDto assignment)
         {
-            throw new NotImplementedException();
+            _dbContext.Kids.Add(new KidDetail
+            {
+                Name = "xiyan",
+                Email = "xiyan@minjet.com.au"
+            });
+            _dbContext.SaveChanges();
         }
 
     }
