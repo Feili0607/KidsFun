@@ -16,7 +16,7 @@ namespace KidsFun.WebApi.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetAssignments")]
+        [HttpGet]
         public async Task<IActionResult> GetAsync(int kidId)
         {
             if (kidId <= 0)
@@ -25,7 +25,7 @@ namespace KidsFun.WebApi.Controllers
             return Ok(assignments.Select(d=> new TaskAssignmentDto { TaskTypeId = d.Type.Id, Due = d.Due}).ToList());
         }
 
-        [HttpPost(Name = "GetAssignments")]
+        [HttpPost]
         public void Assign(TaskAssignmentDto assignment)
         {
 
