@@ -20,6 +20,10 @@ namespace KidsFun.Repositories
             }
             return await Task.FromResult(kidDetail);
         }
+
+
+        //await _db.Kids.AddAsync(new KidDetail());
+        //await _db.SaveChangesAsync();
     }
 }
 

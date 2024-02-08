@@ -11,20 +11,34 @@ namespace KidsFun.Repositories
             _db = dbContext;
 		}
 
-        public Task AddAsync(TaskAssignment newAssignment)
+        public async Task<IEnumerable<TaskAssignment>> LoadAsync(int kidId)
         {
-            throw new NotImplementedException();
+            var taskAssignment = _db.TaskAssignments.FirstOrDefault(k => k.KidId == kidId);
+             if (taskAssignment == default(TaskAssignment))
+            {
+                throw new ArgumentException($"Kid (Id={kidId}) can not be found.");
+            }
+            return (IEnumerable<TaskAssignment>)await Task.FromResult(taskAssignment);
+
         }
 
-        public Task DeleteAsync(int assignmentId)
+        public async Task AddAsync(TaskAssignment newAssignment)
         {
-            throw new NotImplementedException();
+            _db.TaskAssignments.Add(newAssignment);
+            await _db.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<TaskAssignment>> LoadAsync(int kidId)
+        public async Task DeleteAsync(int assignmentId)
         {
-            throw new NotImplementedException();
+            var assignment = await _db.TaskAssignments.FindAsync(assignmentId);
+            if (assignment != null)
+            {
+                _db.TaskAssignments.Remove(assignment);
+                await _db.SaveChangesAsync();
+            }
         }
+
+
     }
 }
 

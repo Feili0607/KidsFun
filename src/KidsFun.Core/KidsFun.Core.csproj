@@ -8,6 +8,5 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KidsFun.Models\KidsFun.Models.csproj" />
-    <ProjectReference Include="..\KidsFun.Repositories\KidsFun.Repositories.csproj" />
   </ItemGroup>
 </Project>
