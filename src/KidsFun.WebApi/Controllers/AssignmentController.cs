@@ -20,14 +20,14 @@ namespace KidsFun.WebApi.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetAssignments")]
+        [HttpGet]
         public async Task<IActionResult> GetAsync(int kidId)
         {
             var result = await _dbContext.Kids.ToListAsync();
             return Ok(result);
         }
 
-        [HttpPost(Name = "GetAssignments")]
+        [HttpPost]
         public void Assign(TaskAssignmentDto assignment)
         {
             _dbContext.Kids.Add(new KidDetail

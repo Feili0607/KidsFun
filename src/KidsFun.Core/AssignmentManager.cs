@@ -4,21 +4,45 @@ namespace KidsFun.Core;
 
 public class AssignmentManager : IAssignmentManager
 {
-    //private readonly IAssignmentRepository _repository;
+    private readonly IAssignmentRepository _repository;
+    private readonly IKidsRepository _kidsRepository;
 
-    public Task AssignAsync(int taskId, int kidId)
+    private readonly ITaskRepository _taskRepository;
+
+    public AssignmentManager(IAssignmentRepository repository, IKidsRepository kidsRepository, ITaskRepository taskRepository)
     {
-        throw new NotImplementedException();
+        _repository = repository;
+        _kidsRepository = kidsRepository;
+        _taskRepository = taskRepository;
     }
 
-    public Task<IEnumerable<TaskAssignment>> LoadAsync(int kidId)
+    public async Task AssignAsync(int taskId, int kidId)
     {
-        throw new NotImplementedException();
+        var kidDetail = await _kidsRepository.GetAsync(kidId);
+        var task = await _taskRepository.GetAsync(taskId);
+        var newAssingment = new TaskAssignment
+        {
+            KidId = kidId,
+            Kid = kidDetail,
+            TypeId = taskId,
+            Type = task,
+            Status = Models.TaskStatus.Assigned,
+            Created = DateTime.Now
+        };
+        
+        await _repository.AddAsync(newAssingment);
     }
 
-    public Task UnassignAsync(int assignmentId)
+    public async Task<IEnumerable<TaskAssignment>> LoadAsync(int kidId)
     {
-        throw new NotImplementedException();
+        if (kidId <= 0)
+            throw new ArgumentException(nameof(kidId));
+
+        return await _repository.LoadAsync(kidId);
+    }
+
+    public async Task UnassignAsync(int assignmentId)
+    {
+       await _repository.DeleteAsync(assignmentId);
     }
 }
-

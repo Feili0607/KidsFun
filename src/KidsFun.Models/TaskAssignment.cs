@@ -2,7 +2,8 @@
 {
     public record TaskAssignment
     {
-        public Guid Id { get; set; }
+
+        public Guid Id { get;set; }
         public DateTime Created { get; set; }
         public int KidId { get; set; }
         public KidDetail Kid { get; set; }
