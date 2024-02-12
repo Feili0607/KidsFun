@@ -6,7 +6,7 @@ namespace KidsFun.Models
 
        Task<IEnumerable<KidDetail>> GetKidsAsync();
        Task<KidDetail> GetKidAsync(int kidId);
-       Task CreateKidAsync(KidDetail kid);
+       Task<KidDetail> CreateKidAsync(KidDetail kid);
        Task UpdateKidAsync(int kidId, KidDetail updatedKid);
        Task DeleteKidAsync(int kidId);
         

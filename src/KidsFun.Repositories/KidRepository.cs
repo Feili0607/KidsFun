@@ -22,7 +22,7 @@ namespace KidsFun.Repositories
 
         public async Task<KidDetail> GetAsync(int kidId)
         {
-            var kidDetail = _db.Kids.FirstOrDefault(k => k.Id == kidId);
+            var kidDetail = await _db.Kids.FindAsync(kidId);
             if(kidDetail == default(KidDetail))
             {
                 throw new ArgumentException($"Kid (Id={kidId}) can not be found.");
@@ -31,15 +31,16 @@ namespace KidsFun.Repositories
         }
 
 
-        public async Task AddAsync(KidDetail kid)
+        public async Task<KidDetail> AddAsync(KidDetail kid)
         {
             if (kid == null)
             {
                 throw new ArgumentNullException(nameof(kid));
             }
 
-            _db.Kids.Add(kid);
+            var addedKid = _db.Kids.Add(kid);
             await _db.SaveChangesAsync();
+            return addedKid.Entity;
         }
 
 

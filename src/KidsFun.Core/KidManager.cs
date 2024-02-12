@@ -25,14 +25,14 @@ namespace KidsFun.Core
         }
 
 
-        public async Task CreateKidAsync(KidDetail kid)
+        public async Task<KidDetail> CreateKidAsync(KidDetail kid)
         {
             if (kid == null)
             {
                 throw new ArgumentNullException(nameof(kid));
             }
 
-            await _kidsRepository.AddAsync(kid);
+            return await _kidsRepository.AddAsync(kid);
 
         }
 

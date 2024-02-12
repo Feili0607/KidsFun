@@ -21,16 +21,24 @@ namespace KidsFun.WebApi.Controllers
         {
             if (kidId <= 0)
                 return BadRequest("Invalid kid Id");
-            var kid = await _manager.GetKidAsync(kidId);
-            return Ok(kid);
+            try
+            {
+                var kid = await _manager.GetKidAsync(kidId);
+                return Ok(kid);
+            }
+            catch(ArgumentException)
+            {
+                return NotFound($"Kid with Id = {kidId} can not be found");
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> AddAsync(KidDetail kid)
         {
-             await _manager.CreateKidAsync(kid);
+            
+            var newKid = await _manager.CreateKidAsync(kid);
 
-            return Ok();
+            return Ok(newKid);
         }
 
         [HttpDelete]
@@ -38,7 +46,7 @@ namespace KidsFun.WebApi.Controllers
         {
             await _manager.DeleteKidAsync(kidId);
 
-            return Ok();
+            return NoContent();
         }
     }
 }
