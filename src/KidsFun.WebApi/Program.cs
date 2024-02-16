@@ -19,7 +19,7 @@ builder.Services.AddSwaggerGen();
 
 var connection = String.Empty;
 
-connection = builder.Configuration.GetConnectionString("AZURE_SANDBOX_DB");
+connection = builder.Configuration.GetConnectionString("KidsFunDb");
 
 
 builder.Services.AddDbContext<KidsFunContext>(options =>
@@ -30,7 +30,7 @@ builder.Services.AddDbContext<KidsFunContext>(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName=="LocalDev")
 {
     app.UseSwagger();
     app.UseSwaggerUI();

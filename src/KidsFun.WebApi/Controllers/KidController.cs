@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace KidsFun.WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller]/")]
     public class KidController : ControllerBase
     {
         private readonly ILogger<KidController> _logger;
@@ -16,7 +16,7 @@ namespace KidsFun.WebApi.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet("{kidId}")]
         public async Task<IActionResult> GetAsync(int kidId)
         {
             if (kidId <= 0)
@@ -30,6 +30,15 @@ namespace KidsFun.WebApi.Controllers
             {
                 return NotFound($"Kid with Id = {kidId} can not be found");
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllAsync()
+        {
+
+            var kids = await _manager.GetKidsAsync();
+            return Ok(kids);
+
         }
 
         [HttpPost]
