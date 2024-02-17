@@ -2,6 +2,7 @@
 
 namespace KidsFun.Models
 {
+    
     public record KidDetail
     {
         public int Id { get; set; }
@@ -10,6 +11,6 @@ namespace KidsFun.Models
 
         public string? Email { get; set; }
 
-        public int points { get; set; }
+        public int Points { get; set; }
     }
 }

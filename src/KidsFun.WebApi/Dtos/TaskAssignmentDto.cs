@@ -1,4 +1,4 @@
-namespace KidsFun.WebApi
+namespace KidsFun.WebApi.Dtos
 {
     public class TaskAssignmentDto
     {
