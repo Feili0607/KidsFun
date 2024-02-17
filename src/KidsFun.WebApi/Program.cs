@@ -10,7 +10,7 @@ builder.Services.AddScoped<IAssignmentManager, AssignmentManager>();
 builder.Services.AddScoped<IKidsRepository, KidRepository>();
 builder.Services.AddScoped<IAssignmentRepository, AssignmentRepository>();
 builder.Services.AddScoped<ITaskRepository, TaskRepository>();
-
+builder.Services.AddScoped<IKidManager, KidManager>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -19,7 +19,7 @@ builder.Services.AddSwaggerGen();
 
 var connection = String.Empty;
 
-connection = builder.Configuration.GetConnectionString("AZURE_SANDBOX_DB");
+connection = builder.Configuration.GetConnectionString("KidsFunDb");
 
 
 builder.Services.AddDbContext<KidsFunContext>(options =>
@@ -30,7 +30,7 @@ builder.Services.AddDbContext<KidsFunContext>(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName=="LocalDev")
 {
     app.UseSwagger();
     app.UseSwaggerUI();
