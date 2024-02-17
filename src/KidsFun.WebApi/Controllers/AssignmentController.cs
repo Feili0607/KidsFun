@@ -23,19 +23,15 @@ namespace KidsFun.WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAsync(int kidId)
         {
-            var result = await _dbContext.Kids.ToListAsync();
-            return Ok(result);
+            // TODO: to add the implementation
+            throw new NotImplementedException();
         }
 
         [HttpPost]
         public void Assign(TaskAssignmentDto assignment)
         {
-            _dbContext.Kids.Add(new KidDetail
-            {
-                Name = "xiyan",
-                Email = "xiyan@minjet.com.au"
-            });
-            _dbContext.SaveChanges();
+            // TODO: to add the implementation
+            throw new NotImplementedException();
         }
 
     }
