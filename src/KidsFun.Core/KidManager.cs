@@ -60,15 +60,9 @@ namespace KidsFun.Core
 
         public async Task DeleteKidAsync(int kidId)
         {
-       
-           await _kidsRepository.DeleteAsync(kidId);
+            await _kidsRepository.DeleteAsync(kidId);
         }
 
-      
-
-       
-
-       
     }
 }
 
