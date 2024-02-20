@@ -1,4 +1,5 @@
 using KidsFun.Models;
+using KidsFun.WebApi.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KidsFun.WebApi.Controllers
@@ -42,12 +43,20 @@ namespace KidsFun.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddAsync(KidDetail kid)
+        public async Task<IActionResult> AddAsync(NewKidDto newKidDto)
         {
+            var newKid = new KidDetail
+            {
+                Name = newKidDto.Name,
+                BirthDate = newKidDto.BirthDate,
+                Email = newKidDto.Email,
+              
+        
+            };
             
-            var newKid = await _manager.CreateKidAsync(kid);
+            var createdKid = await _manager.CreateKidAsync(newKid);
 
-            return Ok(newKid);
+            return Ok(createdKid);
         }
 
         [HttpDelete]
