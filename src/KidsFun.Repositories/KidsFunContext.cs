@@ -23,7 +23,11 @@ namespace KidsFun.Repositories
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<KidDetail>()
+            .Ignore(u => u.Email);
 
+            modelBuilder.Entity<TaskAssignment>()
+                .HasKey(e => e.Id);
 
             modelBuilder.Entity<TaskAssignment>()
                 .HasKey(e => e.Id);
