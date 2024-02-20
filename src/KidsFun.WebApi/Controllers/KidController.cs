@@ -48,10 +48,8 @@ namespace KidsFun.WebApi.Controllers
             var newKid = new KidDetail
             {
                 Name = newKidDto.Name,
-                BirthDate = newKidDto.BirthDate,
-                Email = newKidDto.Email,
-              
-        
+                DateOfBirth = newKidDto.BirthDate,
+                EmailAddress = newKidDto.Email,
             };
             
             var createdKid = await _manager.CreateKidAsync(newKid);

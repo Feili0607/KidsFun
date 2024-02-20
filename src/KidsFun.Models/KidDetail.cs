@@ -15,7 +15,6 @@ namespace KidsFun.Models
         public MailAddress Email
         {
             get => new MailAddress(EmailAddress);
-            set => EmailAddress = value.ToString();
         }
 
         public int Points { get; set; }
@@ -23,5 +22,15 @@ namespace KidsFun.Models
         public DateTime DateOfBirth { get; set; }
 
         public string Gender { get; set; }
+
+        void test(KidDetail entity)
+        {
+            IEmailSender emailSender;
+        }
+    }
+
+    public interface IEmailSender
+    {
+        void SendEmail(MailAddress mail);
     }
 }

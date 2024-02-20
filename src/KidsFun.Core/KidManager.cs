@@ -51,10 +51,8 @@ namespace KidsFun.Core
                 throw new ArgumentException($"Kid with ID {kidId} not found.");
             }
 
-            existingKid.Name = updatedKid.Name;
-            existingKid.Email = updatedKid.Email;
 
-            await _kidsRepository.UpdateAsync(existingKid);
+            await _kidsRepository.UpdateAsync(updatedKid);
         }
 
 
