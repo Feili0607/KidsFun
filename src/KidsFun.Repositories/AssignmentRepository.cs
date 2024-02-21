@@ -28,6 +28,7 @@ namespace KidsFun.Repositories
             await _db.SaveChangesAsync();
         }
 
+
         public async Task DeleteAsync(int assignmentId)
         {
             var assignment = await _db.TaskAssignments.FindAsync(assignmentId);
