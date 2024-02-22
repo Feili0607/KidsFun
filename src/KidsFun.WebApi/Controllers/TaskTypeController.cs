@@ -7,7 +7,7 @@ using KidsFun.Repositories;
 namespace KidsFun.WebApi.Controllers
 {
     [ApiController]
-    [Route("api/[tasktypes]")]
+    [Route("[controller]")]
     public class TaskTypesController : ControllerBase
     {
         private readonly TaskTypesManager _taskTypesManager;
