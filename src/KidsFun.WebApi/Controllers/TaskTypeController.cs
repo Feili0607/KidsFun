@@ -33,5 +33,20 @@ namespace KidsFun.WebApi.Controllers
 
             return Ok(taskType);
         }
+
+        [HttpGet("{id}/calculate-reward")]
+        public IActionResult CalculateRewardPoints(int id, [FromQuery] int workingHours)
+        {
+            try
+            {
+                int rewardPoints = _taskTypesManager.CalculateRewardPoints(id, workingHours);
+                return Ok(rewardPoints);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }
