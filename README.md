@@ -9,7 +9,7 @@ It's aimed to be designed to let it similar to many loyalty systems.
 Kids can take tasks (or being assigned tasks), each completed tasks can have some reward points. the points can be redeemed to be used for screen time, toys, money.
 
 ## phase 2 
-We plan to build the react native mobile app so that both kids and parents (guardian) can manage the tasks.
+We plan to build the react native mobile app so that both kids and parents (guardians) can manage the tasks.
 this is so that kids can sign off some tasks and request to redeem rewards.
 The goal is to also build an android TV app so that it can control when the TV can be used. (this need more investigation)
 
