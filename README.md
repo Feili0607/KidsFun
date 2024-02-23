@@ -1,7 +1,7 @@
 # Kids Fun Project
 This is a small aspnet core project + ReactJs to build a small SaaS application to manage activities of families with kids.
 The product idea is literally unlimited. 
-but first things first
+but first things first, below is the proposed project plan.
 
 ## phase 1 
 We want to have a fully functional web application that can be used by parents to manage their kids' activity, such as piano practise, homework, chores, sports (Not going to break down further).
