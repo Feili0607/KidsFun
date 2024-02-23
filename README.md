@@ -1,4 +1,4 @@
-#Kids Fun Project
+# Kids Fun Project
 This is a small aspnet core project + ReactJs to build a small SaaS application to manage activities of families with kids.
 The product idea is literally unlimited. 
 but first things first
