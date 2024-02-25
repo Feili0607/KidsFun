@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Net.Mail;
+using System.Text.Json.Serialization;
 
 namespace KidsFun.Models
 {
@@ -12,6 +13,7 @@ namespace KidsFun.Models
 
         public string EmailAddress { get; set; }
 
+        [JsonIgnore]
         public MailAddress Email
         {
             get => new MailAddress(EmailAddress);
@@ -23,14 +25,9 @@ namespace KidsFun.Models
 
         public string Gender { get; set; }
 
-        void test(KidDetail entity)
-        {
-            IEmailSender emailSender;
-        }
+        
+
     }
 
-    public interface IEmailSender
-    {
-        void SendEmail(MailAddress mail);
-    }
+ 
 }
