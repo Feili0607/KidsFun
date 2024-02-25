@@ -1,21 +1,35 @@
-﻿namespace KidsFun.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace KidsFun.Models
 {
     public record TaskType
     {
+        [Required(ErrorMessage = "Id is required.")]
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "Id is required.")]
         public string Name { get; set; }
 
-        public bool? skillPractice { get; set; }
+        public TaskCategory Category { get; set; }
 
-        public bool? homework { get; set; }
+        [Required(ErrorMessage = "WorkingHours is required.")]
+        public int WorkingHours { get; set; }
 
-        public bool? cleanUp { get; set; }
+        //RewardPoints per WorkingHours
+        [Required(ErrorMessage = "RewardPointsPerHour is required.")]
+        public int RewardPoints { get; set; }
 
-        public int workingHours { get; set; }
+        public int TotalRewardPoints => WorkingHours * RewardPoints;
 
-        public int rewardPoints { get; set; }
+        [Required(ErrorMessage = "MinimumAge is required.")]
+        public int MinimumAge { get; set; }
+    }
 
-        public int suggestAge { get; set; }
+    public enum TaskCategory
+    {
+        Homework,
+        SkillPractice,
+        CleanUp,
+        //Other Tasktype here
     }
 }
