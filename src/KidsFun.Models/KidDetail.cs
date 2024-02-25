@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Net.Mail;
+using System.Text.Json.Serialization;
 
 namespace KidsFun.Models
 {
@@ -12,10 +13,10 @@ namespace KidsFun.Models
 
         public string EmailAddress { get; set; }
 
+        [JsonIgnore]
         public MailAddress Email
         {
             get => new MailAddress(EmailAddress);
-            set => EmailAddress = value.ToString();
         }
 
         public int Points { get; set; }
@@ -23,5 +24,10 @@ namespace KidsFun.Models
         public DateTime DateOfBirth { get; set; }
 
         public string Gender { get; set; }
+
+        
+
     }
+
+ 
 }

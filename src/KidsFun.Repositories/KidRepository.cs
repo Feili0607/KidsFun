@@ -56,10 +56,7 @@ namespace KidsFun.Repositories
             {
                 throw new ArgumentException($"Kid with {kid.Id} not found");
             }
-
-            existingKid.Name = kid.Name;
-            existingKid.Email = kid.Email;
-
+            _db.Kids.Update(kid);
             await _db.SaveChangesAsync();
 
         }
