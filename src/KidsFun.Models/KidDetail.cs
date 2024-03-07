@@ -25,7 +25,7 @@ namespace KidsFun.Models
 
         public string Gender { get; set; }
 
-        
+        public int SchoolYear { get; set; }
 
     }
 
