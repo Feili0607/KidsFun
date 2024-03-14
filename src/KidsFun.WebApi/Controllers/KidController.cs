@@ -1,5 +1,7 @@
 using KidsFun.Models;
+using KidsFun.WebApi.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace KidsFun.WebApi.Controllers
 {
@@ -42,12 +44,23 @@ namespace KidsFun.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddAsync(KidDetail kid)
+        public async Task<IActionResult> AddAsync(NewKidDto newKidDto)
         {
-            
-            var newKid = await _manager.CreateKidAsync(kid);
+            const string pattern = @"^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$";
+            if (string.IsNullOrEmpty(newKidDto.Email) || !Regex.IsMatch(newKidDto.Email, pattern))
+                return BadRequest("Invalid email.");
 
-            return Ok(newKid);
+            var newKid = new KidDetail
+            {
+                Name = newKidDto.Name,
+                DateOfBirth = newKidDto.BirthDate,
+                EmailAddress = newKidDto.Email,
+                Gender = newKidDto.Gender,
+            };
+            
+            var createdKid = await _manager.CreateKidAsync(newKid);
+
+            return Ok(createdKid);
         }
 
         [HttpDelete]
