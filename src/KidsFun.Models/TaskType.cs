@@ -2,34 +2,40 @@
 
 namespace KidsFun.Models
 {
-    public record TaskType
-    {
-        [Required(ErrorMessage = "Id is required.")]
-        public int Id { get; set; }
-
-        [Required(ErrorMessage = "Id is required.")]
-        public string Name { get; set; }
-
-        public TaskCategory Category { get; set; }
-
-        [Required(ErrorMessage = "WorkingHours is required.")]
-        public int WorkingHours { get; set; }
-
-        //RewardPoints per WorkingHours
-        [Required(ErrorMessage = "RewardPointsPerHour is required.")]
-        public int RewardPoints { get; set; }
-
-        public int TotalRewardPoints => WorkingHours * RewardPoints;
-
-        [Required(ErrorMessage = "MinimumAge is required.")]
-        public int MinimumAge { get; set; }
-    }
-
+    // Enum to represent different categories of tasks
     public enum TaskCategory
     {
         Homework,
         SkillPractice,
         CleanUp,
-        //Other Tasktype here
+        // Add more categories as needed
     }
+    public record TaskType
+    {
+        [Required]
+        public int Id { get; set; }
+
+        [Required]
+        public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        [Required]
+        public int RewardPoints { get; set; }
+
+        public TaskCategory Category { get; set; }
+
+        [Required]
+        public int MinimumAge { get; set; }
+
+        // The duration (in minutes, hours, etc.) required to complete this task type
+        public int Duration { get; set; }
+
+        [Required]
+        public string DifficultyLevel { get; set; }
+
+        // Indicates whether the task type is active or inactive
+        public bool IsActive { get; set; }
+    }
+
 }

@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using KidsFun.Models;
+using KidsFun.Repositories;
 
 namespace KidsFun.WebApi.Controllers
 {
@@ -9,23 +10,25 @@ namespace KidsFun.WebApi.Controllers
     [Route("[controller]")]
     public class TaskTypeController : ControllerBase
     {
-        private readonly List<TaskType> _taskTypes = new List<TaskType>
+        private readonly ITaskTypeRepository _taskTypeRepository;
+
+        public TaskTypeController(ITaskTypeRepository taskTypeRepository)
         {
-            new TaskType { Id = 1, Name = "Homework", Category = TaskCategory.Homework, RewardPoints = 20, MinimumAge = 10 },
-            new TaskType { Id = 2, Name = "Skill Practice", Category = TaskCategory.SkillPractice, RewardPoints = 10, MinimumAge = 10 },
-            new TaskType { Id = 3, Name = "Room Cleaning", Category = TaskCategory.CleanUp, RewardPoints = 5, MinimumAge = 8 }
-        };
+            _taskTypeRepository = taskTypeRepository;
+        }
 
         [HttpGet]
-        public IActionResult GetAllTaskTypes()
+        public async Task<IActionResult> GetAllTaskTypes()
         {
-            return Ok(_taskTypes);
+            var taskTypes = await _taskTypeRepository.GetAllTaskTypes();
+            return Ok(taskTypes);
+
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetTaskTypeById(int id)
+        public async Task<IActionResult> GetTaskTypeById(int id)
         {
-            var taskType = _taskTypes.FirstOrDefault(tt => tt.Id == id);
+            var taskType = await _taskTypeRepository.GetTaskTypeById(id);
             if (taskType == null)
                 return NotFound();
 
@@ -33,22 +36,14 @@ namespace KidsFun.WebApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateTaskType(TaskType taskType)
+        public async Task<IActionResult> CreateTaskType(TaskType taskType)
         {
             // Check if the model state is valid
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            // Check if the ID already exists
-            if (_taskTypes.Any(tt => tt.Id == taskType.Id))
-            {
-                ModelState.AddModelError("Id", "ID already exists.");
-                return BadRequest(ModelState);
-            }
-
             // Add the taskType to the list of task types
-
-            _taskTypes.Add(taskType);
+            await _taskTypeRepository.AddTaskType(taskType);
 
             // Return a 201 Created response with the newly created taskType
             return CreatedAtAction(nameof(GetTaskTypeById), new { id = taskType.Id }, taskType);

@@ -11,6 +11,7 @@ builder.Services.AddScoped<IKidsRepository, KidRepository>();
 builder.Services.AddScoped<IAssignmentRepository, AssignmentRepository>();
 builder.Services.AddScoped<ITaskRepository, TaskRepository>();
 builder.Services.AddScoped<IKidManager, KidManager>();
+builder.Services.AddScoped<ITaskTypeRepository, TaskTypeRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
