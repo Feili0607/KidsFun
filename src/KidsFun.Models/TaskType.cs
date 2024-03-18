@@ -3,13 +3,13 @@
 namespace KidsFun.Models
 {
     // Enum to represent different categories of tasks
-    public enum TaskCategory
-    {
-        Homework,
-        SkillPractice,
-        CleanUp,
-        // Add more categories as needed
-    }
+    //public enum TaskCategory
+    //{
+    //    Homework,
+    //    SkillPractice,
+    //    CleanUp,
+    //    // Add more categories as needed
+    //}
     public record TaskType
     {
         [Required]
@@ -23,7 +23,7 @@ namespace KidsFun.Models
         [Required]
         public int RewardPoints { get; set; }
 
-        public TaskCategory Category { get; set; }
+        //public TaskCategory Category { get; set; }
 
         [Required]
         public int MinimumAge { get; set; }
