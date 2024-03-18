@@ -1,7 +1,8 @@
 ﻿namespace KidsFun.WebApi.Dtos
 {
-    public class NewKidDto
+    public class KidDto
     {
+        public int Id { get; set; }
         public DateTime BirthDate { get; set; }
 
         public string Email { get; set; }

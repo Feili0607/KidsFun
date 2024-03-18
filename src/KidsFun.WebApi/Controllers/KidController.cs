@@ -26,7 +26,14 @@ namespace KidsFun.WebApi.Controllers
             try
             {
                 var kid = await _manager.GetKidAsync(kidId);
-                return Ok(kid);
+                return Ok(new KidDto
+                {
+                    Id = kid.Id,
+                    Name = kid.Name,
+                    BirthDate = kid.DateOfBirth,
+                    Email = kid.EmailAddress,
+                    Gender = kid.Gender,
+                });
             }
             catch(ArgumentException)
             {
@@ -39,7 +46,15 @@ namespace KidsFun.WebApi.Controllers
         {
 
             var kids = await _manager.GetKidsAsync();
-            return Ok(kids);
+
+            return Ok(kids.Select(k => new KidDto
+            {
+                Id = k.Id,
+                Name = k.Name,
+                BirthDate = k.DateOfBirth,
+                Email = k.EmailAddress,
+                Gender = k.Gender,
+            }));
 
         }
 
