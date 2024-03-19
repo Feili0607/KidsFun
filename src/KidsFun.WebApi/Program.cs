@@ -12,6 +12,7 @@ builder.Services.AddScoped<IKidsRepository, KidRepository>();
 builder.Services.AddScoped<IAssignmentRepository, AssignmentRepository>();
 builder.Services.AddScoped<ITaskRepository, TaskRepository>();
 builder.Services.AddScoped<IKidManager, KidManager>();
+builder.Services.AddScoped<ITaskTypeRepository, TaskTypeRepository>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
