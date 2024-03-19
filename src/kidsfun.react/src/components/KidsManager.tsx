@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Grid, Button, Paper } from '@mui/material';
 import KidsList from './KidsList';
 import EditKidDialog from './EditKidDialog';
-import { fetchKids, deleteKid as deleteKidApi, saveKid as saveKidApi } from '../api/kidsApi';
+import { fetchKids, deleteKids as deleteKidsApi, saveKid as saveKidApi } from '../api/kidsApi';
 import { KidDto } from '../types';
 
 const KidsManager: React.FC = () => {
@@ -41,8 +41,8 @@ const KidsManager: React.FC = () => {
     setIsDialogOpen(false);
   };
 
-  const handleDeleteKid = async (kidId: number) => {
-    await deleteKidApi(kidId);
+  const handleDeleteKid = async (kidIds: number[]) => {
+    await deleteKidsApi(kidIds);
     loadKids();
   };
 
@@ -50,7 +50,7 @@ const KidsManager: React.FC = () => {
     <Paper style={{ padding: '20px', margin: '20px' }}>
       <Grid container direction="column" spacing={2}>
         <Grid item xs={12}>
-          <KidsList kids={kids} onEditKid={handleOpenDialogForEdit} />
+          <KidsList kids={kids} onEditKid={handleOpenDialogForEdit} onDeleteSelected={handleDeleteKid} />
         </Grid>
         <Grid item container justifyContent="flex-end" spacing={2}>
           <Grid item>
