@@ -1,5 +1,4 @@
 // src/pages/KidsPage.tsx
-import React from 'react';
 import KidsManager from '../components/KidsManager';
 
 const KidsPage = () => {
